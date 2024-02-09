@@ -29,6 +29,7 @@ import {
   IconChevronDown,
 } from "@tabler/icons-react";
 import classes from "./HeaderMegaMenu.module.css";
+import { ThemeToggle } from "../ThemeToggle/ThemeToggle";
 
 const mockdata = [
   {
@@ -161,6 +162,7 @@ export function HeaderMegaMenu() {
           <Group visibleFrom="sm">
             <Button variant="default">Log in</Button>
             <Button>Sign up</Button>
+            <ThemeToggle />
           </Group>
 
           <Burger
@@ -210,6 +212,7 @@ export function HeaderMegaMenu() {
           <Group justify="center" grow pb="xl" px="md">
             <Button variant="default">Log in</Button>
             <Button>Sign up</Button>
+            <ThemeToggle />
           </Group>
         </ScrollArea>
       </Drawer>

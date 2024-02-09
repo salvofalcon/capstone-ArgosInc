@@ -2,6 +2,7 @@ import "./App.css";
 import { HeaderMegaMenu } from "./components/HeaderMegaMenu/HeaderMegaMenu";
 import { HeroTitle } from "./components/HeroTitle/HeroTitle";
 import { AppShell } from "@mantine/core";
+import { ThemeToggle } from "./components/ThemeToggle/ThemeToggle";
 
 function App() {
   return (

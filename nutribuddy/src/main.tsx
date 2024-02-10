@@ -6,6 +6,7 @@ import { createTheme, MantineProvider } from "@mantine/core";
 import "@mantine/core/styles.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Assistant from "./pages/AssistantPage/Assistant.tsx";
+import { NotFound } from "./pages/NotFoundPage/NotFound.tsx";
 
 const theme = createTheme({
   /** Put your mantine theme override here */
@@ -15,12 +16,11 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    errorElement: <div>404 Not Found</div>,
+    errorElement: <NotFound />,
   },
   {
     path: "/assistant",
     element: <Assistant />,
-    errorElement: <div>404 Not Found</div>,
   },
 ]);
 

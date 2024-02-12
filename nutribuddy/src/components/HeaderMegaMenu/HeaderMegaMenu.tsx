@@ -29,6 +29,8 @@ import {
   IconChevronDown,
 } from "@tabler/icons-react";
 import classes from "./HeaderMegaMenu.module.css";
+import { ThemeToggle } from "../ThemeToggle/ThemeToggle";
+import { Link } from "react-router-dom";
 
 const mockdata = [
   {
@@ -153,14 +155,15 @@ export function HeaderMegaMenu() {
             <a href="#" className={classes.link}>
               Track Calories
             </a>
-            <a href="#" className={classes.link}>
+            <Link to="/assistant" className={classes.link}>
               AI Assistant
-            </a>
+            </Link>
           </Group>
 
           <Group visibleFrom="sm">
             <Button variant="default">Log in</Button>
             <Button>Sign up</Button>
+            <ThemeToggle />
           </Group>
 
           <Burger
@@ -210,6 +213,7 @@ export function HeaderMegaMenu() {
           <Group justify="center" grow pb="xl" px="md">
             <Button variant="default">Log in</Button>
             <Button>Sign up</Button>
+            <ThemeToggle />
           </Group>
         </ScrollArea>
       </Drawer>

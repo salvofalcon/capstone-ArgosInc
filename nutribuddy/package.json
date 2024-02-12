@@ -2,7 +2,6 @@
   "name": "nutribuddy",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
@@ -30,12 +29,17 @@
     "@tiptap/react": "^2.2.1",
     "@tiptap/starter-kit": "^2.2.1",
     "dayjs": "^1.11.10",
+    "dotenv": "^16.4.2",
     "embla-carousel-react": "^7.1.0",
+    "mongoose": "^8.1.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "recharts": "^2.11.0"
   },
   "devDependencies": {
+    "@types/dotenv": "^8.2.0",
+    "@types/mongoose": "^5.11.97",
+    "@types/node": "^20.11.17",
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",
     "@typescript-eslint/eslint-plugin": "^6.14.0",

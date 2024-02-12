@@ -1,0 +1,28 @@
+{
+  "name": "nutribuddy",
+  "version": "1.0.0",
+  "description": "An AI-assisted calorie counter and nutrition app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/salvofalcon/capstone-ArgosInc.git"
+  },
+  "author": "Argos Inc",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/salvofalcon/capstone-ArgosInc/issues"
+  },
+  "homepage": "https://github.com/salvofalcon/capstone-ArgosInc#readme",
+  "dependencies": {
+    "@mantine/core": "^7.5.1",
+    "@mantine/hooks": "^7.5.1"
+  },
+  "devDependencies": {
+    "postcss": "^8.4.35",
+    "postcss-preset-mantine": "^1.13.0",
+    "postcss-simple-vars": "^7.0.1"
+  }
+}

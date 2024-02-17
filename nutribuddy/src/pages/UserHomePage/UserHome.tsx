@@ -1,9 +1,8 @@
 import { AppShell, Title } from "@mantine/core";
 import { HeaderMegaMenu } from "../../components/HeaderMegaMenu/HeaderMegaMenu";
-import { useLocation } from "react-router-dom";
+import UserHomeComponent from "../../components/UserHome/UserHome";
 
 export function UserHome() {
-  const location = useLocation();
   return (
     <AppShell header={{ height: 60 }} padding="md">
       <AppShell.Header>
@@ -11,9 +10,7 @@ export function UserHome() {
       </AppShell.Header>
 
       <AppShell.Main>
-        <Title ta="center">
-          Hello {location.state.id} and welcome back to Nutribuddy!
-        </Title>
+        <UserHomeComponent />
       </AppShell.Main>
     </AppShell>
   );

@@ -164,7 +164,9 @@ export function HeaderMegaMenu() {
             <Link to="/login">
               <Button variant="default">Log in</Button>
             </Link>
-            <Button>Sign up</Button>
+            <Link to="/signup">
+              <Button>Sign up</Button>
+            </Link>
             <ThemeToggle />
           </Group>
 

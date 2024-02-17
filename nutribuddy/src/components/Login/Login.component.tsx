@@ -33,8 +33,9 @@ export default class Login extends Component<
       .then((data) => {
         console.log(data, "userRegister");
         if (data.status == "OK") {
-          alert("Login successful");
+          //alert("Login successful");
           window.localStorage.setItem("token", data.data);
+          window.localStorage.setItem("loggedIn", "true");
           window.location.href = "./userHome";
         }
       });

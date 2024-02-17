@@ -71,6 +71,13 @@ export function HeaderMegaMenu() {
   const [linksOpened, { toggle: toggleLinks }] = useDisclosure(false);
   const theme = useMantineTheme();
 
+  const logOut = () => {
+    window.localStorage.clear();
+    window.location.href = "./login";
+  };
+
+  const isLoggedIn = window.localStorage.getItem("loggedIn");
+
   const links = mockdata.map((item) => (
     <UnstyledButton className={classes.subLink} key={item.title}>
       <Group wrap="nowrap" align="flex-start">
@@ -160,15 +167,22 @@ export function HeaderMegaMenu() {
             </Link>
           </Group>
 
-          <Group visibleFrom="sm">
-            <Link to="/login">
-              <Button variant="default">Log in</Button>
-            </Link>
-            <Link to="/signup">
-              <Button>Sign up</Button>
-            </Link>
-            <ThemeToggle />
-          </Group>
+          {isLoggedIn == "true" ? (
+            <Group visibleFrom="sm">
+              <Button onClick={logOut}>Sign out</Button>
+              <ThemeToggle />
+            </Group>
+          ) : (
+            <Group visibleFrom="sm">
+              <Link to="/login">
+                <Button variant="default">Log in</Button>
+              </Link>
+              <Link to="/signup">
+                <Button>Sign up</Button>
+              </Link>
+              <ThemeToggle />
+            </Group>
+          )}
 
           <Burger
             opened={drawerOpened}

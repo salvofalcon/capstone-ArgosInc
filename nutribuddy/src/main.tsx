@@ -15,10 +15,12 @@ const theme = createTheme({
   /** Put your mantine theme override here */
 });
 
+const isLoggedIn = window.localStorage.getItem("loggedIn");
+
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: isLoggedIn == "true" ? <App /> : <UserHome />,
     errorElement: <NotFound />,
   },
   {
@@ -38,6 +40,7 @@ const router = createBrowserRouter([
     element: <UserHome />,
   },
 ]);
+
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <MantineProvider theme={theme} defaultColorScheme="dark">

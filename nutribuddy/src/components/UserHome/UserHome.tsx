@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Button, Center, Paper } from "@mantine/core";
 
 export default class UserHome extends Component<object, { userData: any }> {
   constructor(props: any) {
@@ -26,12 +27,22 @@ export default class UserHome extends Component<object, { userData: any }> {
       });
   }
 
+  logOut = () => {
+    window.localStorage.clear();
+    window.location.href = "./login";
+  };
+
   render(): React.ReactNode {
     return (
-      <div>
-        Name<h1>{this.state.userData.fname}</h1>
-        Email<h1>{this.state.userData.email}</h1>
-      </div>
+      <>
+        <Paper withBorder shadow="sm" radius="md" p="lg">
+          Name<h1>{this.state.userData.fname}</h1>
+          Email<h1>{this.state.userData.email}</h1>
+          <Center>
+            <Button onClick={this.logOut}>Sign out</Button>
+          </Center>
+        </Paper>
+      </>
     );
   }
 }

@@ -1,4 +1,4 @@
-import { AppShell, Title } from "@mantine/core";
+import { AppShell, Button, Center, Paper, Title } from "@mantine/core";
 import { HeaderMegaMenu } from "../../components/HeaderMegaMenu/HeaderMegaMenu";
 import UserHomeComponent from "../../components/UserHome/UserHome";
 
@@ -10,7 +10,9 @@ export function UserHome() {
       </AppShell.Header>
 
       <AppShell.Main>
-        <UserHomeComponent />
+        <Center>
+          <UserHomeComponent />
+        </Center>
       </AppShell.Main>
     </AppShell>
   );

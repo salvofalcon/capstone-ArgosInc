@@ -20,7 +20,7 @@ const isLoggedIn = window.localStorage.getItem("loggedIn");
 const router = createBrowserRouter([
   {
     path: "/",
-    element: isLoggedIn == "true" ? <App /> : <UserHome />,
+    element: isLoggedIn == "true" ? <UserHome /> : <App />,
     errorElement: <NotFound />,
   },
   {

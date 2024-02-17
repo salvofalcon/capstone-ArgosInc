@@ -1,3 +1,5 @@
+const { off } = require("process");
+
 module.exports = {
   root: true,
   env: { browser: true, es2020: true, amd: true, node: true },
@@ -14,6 +16,10 @@ module.exports = {
       'warn',
       { allowConstantExport: true },
     ],
-    '@typescript-eslint/no-unused-vars': 'off'
+    '@typescript-eslint/no-unused-vars': 'off',
+    '@typescript-eslint/no-var-requires': 'off',
+    'no-sparse-arrays': 'off',
+    'no-fallthrough': 'off',
+    '@typescript-eslint/no-explicit-any': 'off'
   },
 }

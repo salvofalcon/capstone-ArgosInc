@@ -7,6 +7,9 @@ import "@mantine/core/styles.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Assistant from "./pages/AssistantPage/Assistant.tsx";
 import { NotFound } from "./pages/NotFoundPage/NotFound.tsx";
+import { Login } from "./pages/LoginPage/Login.tsx";
+import { SignUp } from "./pages/SignUpPage/SignUp.tsx";
+import { UserHome } from "./pages/UserHomePage/UserHome.tsx";
 
 const theme = createTheme({
   /** Put your mantine theme override here */
@@ -21,6 +24,18 @@ const router = createBrowserRouter([
   {
     path: "/assistant",
     element: <Assistant />,
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/signup",
+    element: <SignUp />,
+  },
+  {
+    path: "/userhome",
+    element: <UserHome />,
   },
 ]);
 

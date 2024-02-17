@@ -99,9 +99,9 @@ export function HeaderMegaMenu() {
           <MantineLogo size={30} />
 
           <Group h="100%" gap={0} visibleFrom="sm">
-            <a href="#" className={classes.link}>
+            <Link to="/" className={classes.link}>
               Home
-            </a>
+            </Link>
             <HoverCard
               width={600}
               position="bottom"
@@ -161,7 +161,9 @@ export function HeaderMegaMenu() {
           </Group>
 
           <Group visibleFrom="sm">
-            <Button variant="default">Log in</Button>
+            <Link to="/login">
+              <Button variant="default">Log in</Button>
+            </Link>
             <Button>Sign up</Button>
             <ThemeToggle />
           </Group>

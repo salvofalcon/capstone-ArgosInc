@@ -1,4 +1,16 @@
 import { Component } from "react";
+import {
+  TextInput,
+  PasswordInput,
+  Text,
+  Paper,
+  Group,
+  Button,
+  Divider,
+  Anchor,
+  Stack,
+} from "@mantine/core";
+import { Link } from "react-router-dom";
 
 export default class Login extends Component<
   object,
@@ -37,65 +49,72 @@ export default class Login extends Component<
           window.localStorage.setItem("token", data.data);
           window.localStorage.setItem("loggedIn", "true");
           window.location.href = "./userHome";
+        } else {
+          alert("Login failed, please try again");
         }
       });
   }
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <h3>Sign In</h3>
+      <Paper radius="md" p="xl" withBorder>
+        <Text size="lg" fw={500}>
+          Welcome to Nutribuddy, please login
+        </Text>
+        <Link to="/signup" style={{ textDecoration: "none" }}>
+          <Text c="dimmed" size="xs" ta="center" mt={5}>
+            Do not have an account yet?{" "}
+            <Anchor size="sm" component="button">
+              Create account
+            </Anchor>
+          </Text>
+        </Link>
 
-        <div className="mb-3">
-          <label>Email address</label>
-          <input
-            type="email"
-            className="form-control"
-            placeholder="Enter email"
-            onChange={(e) =>
-              this.setState({
-                email: e.target.value,
-              })
-            }
-          />
-        </div>
+        <Divider my="lg" />
 
-        <div className="mb-3">
-          <label>Password</label>
-          <input
-            type="password"
-            className="form-control"
-            placeholder="Enter password"
-            onChange={(e) =>
-              this.setState({
-                password: e.target.value,
-              })
-            }
-          />
-        </div>
+        <form onSubmit={this.handleSubmit}>
+          <Stack>
+            <div>
+              <TextInput
+                required
+                label="Email"
+                placeholder="hello@mantine.dev"
+                onChange={(e) =>
+                  this.setState({
+                    email: e.target.value,
+                  })
+                }
+                radius="md"
+              />
+            </div>
 
-        <div className="mb-3">
-          <div className="custom-control custom-checkbox">
-            <input
-              type="checkbox"
-              className="custom-control-input"
-              id="customCheck1"
-            />
-            <label className="custom-control-label" htmlFor="customCheck1">
-              Remember me
-            </label>
-          </div>
-        </div>
+            <div>
+              <PasswordInput
+                required
+                label="Password"
+                placeholder="Your password"
+                onChange={(e) =>
+                  this.setState({
+                    password: e.target.value,
+                  })
+                }
+                radius="md"
+              />
+            </div>
 
-        <div className="d-grid">
-          <button type="submit" className="btn btn-primary">
-            Submit
-          </button>
-        </div>
-        <p className="forgot-password text-right">
-          Forgot <a href="#">password?</a>
-        </p>
-      </form>
+            <Group justify="space-between" mt="xl">
+              <Link to="/signup" style={{ textDecoration: "none" }}>
+                <Anchor component="button" type="button" c="dimmed" size="xs">
+                  Forgot Password?
+                </Anchor>
+              </Link>
+              <Button type="submit" radius="xl">
+                Submit
+              </Button>
+            </Group>
+          </Stack>
+        </form>
+      </Paper>
     );
   }
 }

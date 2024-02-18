@@ -11,10 +11,6 @@ export function SignUp() {
       </AppShell.Header>
 
       <AppShell.Main>
-        <Title ta="center" className={classes.title}>
-          Welcome back!
-        </Title>
-
         <Center>
           <SignUpComponent />
         </Center>

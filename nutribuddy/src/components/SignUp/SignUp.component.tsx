@@ -1,4 +1,16 @@
 import { Component } from "react";
+import {
+  TextInput,
+  PasswordInput,
+  Text,
+  Paper,
+  Button,
+  Divider,
+  Anchor,
+  Stack,
+  Center,
+} from "@mantine/core";
+import { Link } from "react-router-dom";
 
 export default class SignUp extends Component<
   object,
@@ -36,79 +48,98 @@ export default class SignUp extends Component<
       .then((res) => res.json())
       .then((data) => {
         console.log(data, "userRegister");
+        if (data.status == "OK") {
+          alert("Account created successfully, please log in");
+          window.location.href = "./login";
+        } else {
+          alert(data.error);
+        }
       });
   }
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <h3>Sign Up</h3>
+      <Paper radius="md" p="xl" withBorder>
+        <Text size="lg" fw={500}>
+          Welcome to Nutribuddy, please register
+        </Text>
+        <Link to="/login" style={{ textDecoration: "none" }}>
+          <Text c="dimmed" size="xs" ta="center" mt={5}>
+            Already have an account?{" "}
+            <Anchor size="sm" component="button">
+              Login
+            </Anchor>
+          </Text>
+        </Link>
 
-        <div className="mb-3">
-          <label>First name</label>
-          <input
-            type="text"
-            className="form-control"
-            placeholder="First name"
-            onChange={(e) =>
-              this.setState({
-                fname: e.target.value,
-              })
-            }
-          />
-        </div>
+        <Divider my="lg" />
 
-        <div className="mb-3">
-          <label>Last name</label>
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Last name"
-            onChange={(e) =>
-              this.setState({
-                lname: e.target.value,
-              })
-            }
-          />
-        </div>
+        <form onSubmit={this.handleSubmit}>
+          <Stack>
+            <div>
+              <TextInput
+                required
+                label="First Name"
+                placeholder="Your first name"
+                onChange={(e) =>
+                  this.setState({
+                    fname: e.target.value,
+                  })
+                }
+                radius="md"
+              />
+            </div>
 
-        <div className="mb-3">
-          <label>Email address</label>
-          <input
-            type="email"
-            className="form-control"
-            placeholder="Enter email"
-            onChange={(e) =>
-              this.setState({
-                email: e.target.value,
-              })
-            }
-          />
-        </div>
+            <div>
+              <TextInput
+                required
+                label="Last Name"
+                placeholder="Your last name"
+                onChange={(e) =>
+                  this.setState({
+                    lname: e.target.value,
+                  })
+                }
+                radius="md"
+              />
+            </div>
 
-        <div className="mb-3">
-          <label>Password</label>
-          <input
-            type="password"
-            className="form-control"
-            placeholder="Enter password"
-            onChange={(e) =>
-              this.setState({
-                password: e.target.value,
-              })
-            }
-          />
-        </div>
+            <div>
+              <TextInput
+                required
+                label="Email"
+                placeholder="Your email"
+                onChange={(e) =>
+                  this.setState({
+                    email: e.target.value,
+                  })
+                }
+                radius="md"
+              />
+            </div>
 
-        <div className="d-grid">
-          <button type="submit" className="btn btn-primary">
-            Sign Up
-          </button>
-        </div>
-        <p className="forgot-password text-right">
-          Already registered <a href="/sign-in">sign in?</a>
-        </p>
-      </form>
+            <div className="mb-3">
+              <PasswordInput
+                required
+                label="Password"
+                placeholder="Your password"
+                onChange={(e) =>
+                  this.setState({
+                    password: e.target.value,
+                  })
+                }
+                radius="md"
+              />
+            </div>
+
+            <Center pt="lg">
+              <Button type="submit" radius="xl">
+                Sign Up
+              </Button>
+            </Center>
+          </Stack>
+        </form>
+      </Paper>
     );
   }
 }

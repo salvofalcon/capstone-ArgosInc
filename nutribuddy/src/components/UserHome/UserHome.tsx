@@ -24,6 +24,11 @@ export default class UserHome extends Component<object, { userData: any }> {
       .then((data) => {
         console.log(data, "userData");
         this.setState({ userData: data.data });
+        if (data.data == "token expired") {
+          alert("Token expired, please log in");
+          window.localStorage.clear();
+          window.location.href = "./login";
+        }
       });
   }
 

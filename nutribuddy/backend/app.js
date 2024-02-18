@@ -55,7 +55,9 @@ app.post("/login-user", async(req, res) => {
         return res.send({error: "Account not found, please try again."});
     }
     if(await bcrypt.compare(password, user.password)) {
-        const token = jwt.sign({email: user.email}, JWT_SECRET);
+        const token = jwt.sign({email: user.email}, JWT_SECRET,{
+            expiresIn: 57600,
+        });
 
         if(res.status(201)) {
             return res.json({ status: "OK", data: token});
@@ -70,7 +72,17 @@ app.post("/userData", async(req, res) => {
     const {token} = req.body;
 
     try {
-        const user = jwt.verify(token, JWT_SECRET);
+        const user = jwt.verify(token, JWT_SECRET, (err, res) => {
+            if(err) {
+                return "token expired";
+            }
+            return res;
+        });
+        console.log(user)
+        if(user == "token expired") {
+            return res.send({status: "error", data: "token expired"});
+        }
+
         const useremail = user.email;
         User.findOne({email: useremail})
             .then((data) => {

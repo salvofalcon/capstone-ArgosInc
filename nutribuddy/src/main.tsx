@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./pages/HomePage/App.tsx";
+import LandingPage from "./pages/LandingPage/LandingPage.tsx";
 import "./index.css";
 import { createTheme, MantineProvider } from "@mantine/core";
 import "@mantine/core/styles.css";
@@ -20,7 +20,7 @@ const isLoggedIn = window.localStorage.getItem("loggedIn");
 const router = createBrowserRouter([
   {
     path: "/",
-    element: isLoggedIn == "true" ? <UserHome /> : <App />,
+    element: isLoggedIn == "true" ? <UserHome /> : <LandingPage />,
     errorElement: <NotFound />,
   },
   {

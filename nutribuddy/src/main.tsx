@@ -4,7 +4,11 @@ import LandingPage from "./pages/LandingPage/LandingPage.tsx";
 import "./index.css";
 import { createTheme, MantineProvider } from "@mantine/core";
 import "@mantine/core/styles.css";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+} from "react-router-dom";
 import Assistant from "./pages/AssistantPage/Assistant.tsx";
 import { NotFound } from "./pages/NotFoundPage/NotFound.tsx";
 import { Login } from "./pages/LoginPage/Login.tsx";
@@ -26,7 +30,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/assistant",
-    element: <Assistant />,
+    element: isLoggedIn == "true" ? <Assistant /> : <Navigate to="/login" />,
   },
   {
     path: "/login",

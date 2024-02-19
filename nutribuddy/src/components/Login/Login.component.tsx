@@ -103,7 +103,7 @@ export default class Login extends Component<
             </div>
 
             <Group justify="space-between" mt="xl">
-              <Link to="/signup" style={{ textDecoration: "none" }}>
+              <Link to="/forgot-password" style={{ textDecoration: "none" }}>
                 <Anchor component="button" type="button" c="dimmed" size="xs">
                   Forgot Password?
                 </Anchor>

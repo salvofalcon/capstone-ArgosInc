@@ -10,6 +10,7 @@ import { NotFound } from "./pages/NotFoundPage/NotFound.tsx";
 import { Login } from "./pages/LoginPage/Login.tsx";
 import { SignUp } from "./pages/SignUpPage/SignUp.tsx";
 import { UserHome } from "./pages/UserHomePage/UserHome.tsx";
+import { ForgotPasswordPage } from "./pages/ForgotPassword/ForgotPasswordPage.tsx";
 
 const theme = createTheme({
   /** Put your mantine theme override here */
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
   {
     path: "/userhome",
     element: <UserHome />,
+  },
+  {
+    path: "/forgot-password",
+    element: <ForgotPasswordPage />,
   },
 ]);
 

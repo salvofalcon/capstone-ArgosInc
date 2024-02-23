@@ -31,6 +31,8 @@ export function HeroTitle() {
             className={classes.control}
             variant="gradient"
             gradient={{ from: "blue", to: "cyan" }}
+            component="a"
+            href="/signup"
           >
             Get started
           </Button>

@@ -56,9 +56,8 @@
     padding-right: rem(38px);
 
     position: absolute;
-    left: 35%;
+    left: 25%;
     top: 50%;
-    transform: translate(-50%, -50%);
   
     @media (max-width: $mantine-breakpoint-sm) {
       height: rem(54px);

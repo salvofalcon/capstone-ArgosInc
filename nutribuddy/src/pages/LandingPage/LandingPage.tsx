@@ -1,4 +1,4 @@
-import "./App.css";
+import "./LandingPage.css";
 import { HeaderMegaMenu } from "../../components/HeaderMegaMenu/HeaderMegaMenu";
 import { HeroTitle } from "../../components/HeroTitle/HeroTitle";
 import { AppShell } from "@mantine/core";

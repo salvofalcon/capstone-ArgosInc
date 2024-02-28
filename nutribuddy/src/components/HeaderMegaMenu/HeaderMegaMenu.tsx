@@ -159,6 +159,9 @@ export function HeaderMegaMenu() {
                 </div>
               </HoverCard.Dropdown>
             </HoverCard>
+            <Link to="/foodLookup" className={classes.link}>
+              Food Lookup
+            </Link>
             <a href="#" className={classes.link}>
               Track Calories
             </a>

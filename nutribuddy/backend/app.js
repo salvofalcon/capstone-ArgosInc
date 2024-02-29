@@ -99,6 +99,27 @@ app.post("/userData", async(req, res) => {
     }
 });
 
+app.post("/completeProfile", async(req, res) => {
+    //Get user ID from request
+    const userId = req.user.id;
+
+    try {
+        //find the user by ID and update with new profile info
+        const updatedUser = await User.findByIdAndUpdate(userId, {
+            height: req.body.height,
+            weight: req.body.weight,
+            age: req.body.age,
+            sex: req.body.sex,
+            bmr: req.body.bmr
+        }, { new: true});
+        
+        res.json(updatedUser);
+    } catch (error) {
+        res.status(500).json({message: 'Error updating profile', error: error});
+    }
+
+});
+
 app.post("/forgot-password", async(req, res) => {
     const {email} = req.body;
     try {

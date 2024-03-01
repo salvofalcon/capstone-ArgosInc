@@ -14,10 +14,13 @@ import {
   Container,
   ThemeIcon,
   rem,
+  Modal,
 } from "@mantine/core";
 import { Link } from "react-router-dom";
+import { useDisclosure } from "@mantine/hooks";
 import { IconColorSwatch } from "@tabler/icons-react";
 import classes from "./FoodLookup.module.css";
+import { FoodModal } from "../FoodModal/FoodModal";
 
 export default class FoodLookup extends Component<
   object,
@@ -112,9 +115,24 @@ export default class FoodLookup extends Component<
                 className={classes.card}
               >
                 <div className={classes.container}>
-                  {foodItem.name}
-
-                  <Button radius="xl">Add Food</Button>
+                  <Text>{foodItem.name}</Text>
+                  <FoodModal
+                    title={foodItem.name}
+                    servingsData={foodItem.servings.map((serving: any) => ({
+                      value: serving.name,
+                    }))}
+                    calories={Math.round(foodItem.nutrients.energy / 4.184)}
+                  />
+                </div>
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  <Text size="xs" style={{ marginRight: "8px" }}>
+                    {Math.round(foodItem.nutrients.energy / 4.184)} cal{", "}
+                    {foodItem.servings &&
+                      foodItem.servings.length > 0 &&
+                      foodItem.servings[0].name}
+                    {", "}
+                    {foodItem.brand.name}
+                  </Text>
                 </div>
               </Paper>
             ))}

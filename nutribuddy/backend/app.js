@@ -188,7 +188,7 @@ app.post("/search-food", async (req, res) => {
         const { query } = req.body;
         const apiKey = process.env.CK_API_KEY;
         const password = "";
-        const response = await axios.get(`https://foodapi.calorieking.com/v1/foods?region=us&query=${query}&fields=$summary,nutrients`, {
+        const response = await axios.get(`https://foodapi.calorieking.com/v1/foods?region=us&query=${query}&fields=$detailed,nutrients,servings`, {
             headers: {
                 Authorization: "Basic " + Buffer.from(apiKey + ":" + password).toString('base64'),
                 "Content-Type": "application/json",

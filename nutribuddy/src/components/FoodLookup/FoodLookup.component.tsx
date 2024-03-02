@@ -16,9 +16,6 @@ import {
   rem,
   Modal,
 } from "@mantine/core";
-import { Link } from "react-router-dom";
-import { useDisclosure } from "@mantine/hooks";
-import { IconColorSwatch } from "@tabler/icons-react";
 import classes from "./FoodLookup.module.css";
 import { FoodModal } from "../FoodModal/FoodModal";
 
@@ -118,18 +115,36 @@ export default class FoodLookup extends Component<
                   <Text>{foodItem.name}</Text>
                   <FoodModal
                     title={foodItem.name}
-                    servingsData={foodItem.servings.map((serving: any) => ({
-                      value: serving.name,
-                    }))}
+                    servingsData={foodItem.servings.reduce(
+                      (uniqueServings: any, serving: any) => {
+                        // Check if the serving name is not already in the array
+                        if (
+                          !uniqueServings.some(
+                            (s: any) => s.value === serving.name
+                          )
+                        ) {
+                          // Add the serving name to the array
+                          uniqueServings.push({
+                            value: serving.name,
+                            scale: serving.scale,
+                          });
+                        }
+                        // Return the array
+                        return uniqueServings;
+                      },
+                      []
+                    )}
                     calories={Math.round(foodItem.nutrients.energy / 4.184)}
+                    scale={1}
+                    carbs={foodItem.nutrients.totalCarbs}
+                    fat={foodItem.nutrients.fat}
+                    protein={foodItem.nutrients.protein}
                   />
                 </div>
                 <div style={{ display: "flex", alignItems: "center" }}>
                   <Text size="xs" style={{ marginRight: "8px" }}>
                     {Math.round(foodItem.nutrients.energy / 4.184)} cal{", "}
-                    {foodItem.servings &&
-                      foodItem.servings.length > 0 &&
-                      foodItem.servings[0].name}
+                    {foodItem.defaultServing.name}
                     {", "}
                     {foodItem.brand.name}
                   </Text>

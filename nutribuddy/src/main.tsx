@@ -51,7 +51,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/foodLookup",
-    element: <FoodLookup />,
+    element: isLoggedIn == "true" ? <FoodLookup /> : <Navigate to="/login" />,
   },
 ]);
 

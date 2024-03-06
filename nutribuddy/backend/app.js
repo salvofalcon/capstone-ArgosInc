@@ -4,6 +4,7 @@ const moongoose = require('mongoose');
 const { default: mongoose } = require('mongoose');
 require('dotenv').config();
 const bcrypt = require("bcryptjs");
+const axios = require('axios');
 
 const app = express();
 app.use(express.json());
@@ -179,6 +180,28 @@ app.post("/reset-password/:id/:token", async(req, res) => {
     } catch(error) {
         console.log(error);
         res.send("Something Went Wrong");
+    }
+});
+
+app.post("/search-food", async (req, res) => {
+    try {
+        const { query } = req.body;
+        const apiKey = process.env.CK_API_KEY;
+        const password = "";
+        const response = await axios.get(`https://foodapi.calorieking.com/v1/foods?region=us&query=${query}&fields=$detailed,nutrients,servings`, {
+            headers: {
+                Authorization: "Basic " + Buffer.from(apiKey + ":" + password).toString('base64'),
+                "Content-Type": "application/json",
+                Accept: "application/json",
+                "Access-Control-Allow-Origin": "*",
+                'x-rapidapi-key': process.env.CK_API_KEY,
+            }
+        });
+        const data = response.data;
+        res.json(data);
+    } catch (error) {
+        console.error("Error searching for food:", error);
+        res.status(500).send("Error searching for food");
     }
 });
 

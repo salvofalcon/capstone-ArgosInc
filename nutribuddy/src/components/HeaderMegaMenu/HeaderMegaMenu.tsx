@@ -32,6 +32,7 @@ import classes from "./HeaderMegaMenu.module.css";
 import { ThemeToggle } from "../ThemeToggle/ThemeToggle";
 import { Link } from "react-router-dom";
 
+/*
 const mockdata = [
   {
     icon: IconCode,
@@ -64,6 +65,7 @@ const mockdata = [
     description: "Combusken battles with the intensely hot flames it spews",
   },
 ];
+*/
 
 export function HeaderMegaMenu() {
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
@@ -78,6 +80,7 @@ export function HeaderMegaMenu() {
 
   const isLoggedIn = window.localStorage.getItem("loggedIn");
 
+  /*
   const links = mockdata.map((item) => (
     <UnstyledButton className={classes.subLink} key={item.title}>
       <Group wrap="nowrap" align="flex-start">
@@ -98,6 +101,7 @@ export function HeaderMegaMenu() {
       </Group>
     </UnstyledButton>
   ));
+*/
 
   return (
     <Box pb={120}>
@@ -109,6 +113,7 @@ export function HeaderMegaMenu() {
             <Link to="/" className={classes.link}>
               Home
             </Link>
+            {/*
             <HoverCard
               width={600}
               position="bottom"
@@ -144,6 +149,7 @@ export function HeaderMegaMenu() {
                   {links}
                 </SimpleGrid>
 
+
                 <div className={classes.dropdownFooter}>
                   <Group justify="space-between">
                     <div>
@@ -159,6 +165,10 @@ export function HeaderMegaMenu() {
                 </div>
               </HoverCard.Dropdown>
             </HoverCard>
+              */}
+            <Link to="/foodLookup" className={classes.link}>
+              Food Lookup
+            </Link>
             <a href="#" className={classes.link}>
               Track Calories
             </a>
@@ -204,9 +214,9 @@ export function HeaderMegaMenu() {
         <ScrollArea h={`calc(100vh - ${rem(80)})`} mx="-md">
           <Divider my="sm" />
 
-          <a href="#" className={classes.link}>
+          <Link to="/" className={classes.link}>
             Home
-          </a>
+          </Link>
           <UnstyledButton className={classes.link} onClick={toggleLinks}>
             <Center inline>
               <Box component="span" mr={5}>
@@ -218,7 +228,7 @@ export function HeaderMegaMenu() {
               />
             </Center>
           </UnstyledButton>
-          <Collapse in={linksOpened}>{links}</Collapse>
+          {/*<Collapse in={linksOpened}>{links}</Collapse>*/}
           <a href="#" className={classes.link}>
             Learn
           </a>
@@ -228,11 +238,22 @@ export function HeaderMegaMenu() {
 
           <Divider my="sm" />
 
-          <Group justify="center" grow pb="xl" px="md">
-            <Button variant="default">Log in</Button>
-            <Button>Sign up</Button>
-            <ThemeToggle />
-          </Group>
+          {isLoggedIn == "true" ? (
+            <Group visibleFrom="sm">
+              <Button onClick={logOut}>Sign out</Button>
+              <ThemeToggle />
+            </Group>
+          ) : (
+            <Group justify="center" grow pb="xl" px="md">
+              <Link to="/login">
+                <Button variant="default">Log in</Button>
+              </Link>
+              <Link to="/signup">
+                <Button>Sign up</Button>
+              </Link>
+              <ThemeToggle />
+            </Group>
+          )}
         </ScrollArea>
       </Drawer>
     </Box>

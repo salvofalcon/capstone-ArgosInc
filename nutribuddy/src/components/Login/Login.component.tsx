@@ -108,7 +108,11 @@ export default class Login extends Component<
                   Forgot Password?
                 </Anchor>
               </Link>
-              <Button type="submit" radius="xl">
+              <Button
+                style={{ backgroundColor: "#22B37B" }}
+                type="submit"
+                radius="xl"
+              >
                 Submit
               </Button>
             </Group>

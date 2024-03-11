@@ -92,7 +92,11 @@ export default class FoodLookup extends Component<
                 />
               </div>
 
-              <Button type="submit" radius="xl">
+              <Button
+                style={{ backgroundColor: "#22B37B" }}
+                type="submit"
+                radius="xl"
+              >
                 Submit
               </Button>
             </Stack>
@@ -107,7 +111,6 @@ export default class FoodLookup extends Component<
                 radius="md"
                 m="lg"
                 p="xl"
-                withBorder
                 key={index}
                 className={classes.card}
               >

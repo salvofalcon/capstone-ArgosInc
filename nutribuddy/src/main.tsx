@@ -16,6 +16,8 @@ import { SignUp } from "./pages/SignUpPage/SignUp.tsx";
 import { UserHome } from "./pages/UserHomePage/UserHome.tsx";
 import { ForgotPasswordPage } from "./pages/ForgotPassword/ForgotPasswordPage.tsx";
 import { FoodLookup } from "./pages/FoodLookupPage/FoodLookup.tsx";
+import CalorieGoalCalculator from "./pages/CalorieGoal/CalorieGoalCalculator.tsx";
+import BMRCalculator from "./pages/CalorieGoal/CalorieGoalCalculator.tsx";
 
 const theme = createTheme({
   /** Put your mantine theme override here */
@@ -53,6 +55,11 @@ const router = createBrowserRouter([
     path: "/foodLookup",
     element: isLoggedIn == "true" ? <FoodLookup /> : <Navigate to="/login" />,
   },
+  {
+    path: "/bmr-calculator",
+    element: <BMRCalculator />,
+  },
+
 ]);
 
 

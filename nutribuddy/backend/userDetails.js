@@ -12,7 +12,10 @@ const UserDetailsSchema = new mongoose.Schema(
         weight: Number,
         age: Number,
         sex: String,
-        bmr: Number
+        bmr: Number,
+        activityLevel: String,
+        goal: String,
+        userCalorieGoal: String,
     },
     {
         collection: "UserInfo"

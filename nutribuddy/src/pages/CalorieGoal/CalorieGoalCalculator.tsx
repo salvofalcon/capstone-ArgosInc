@@ -8,6 +8,11 @@ const BMRCalculator: React.FC = () => {
   const [age, setAge] = useState<number | string>("");
   const [sex, setSex] = useState<string | null>(null);
   const [bmrResult, setBmrResult] = useState<number | null>(null);
+  const [activityLevel, setActivityLevel] = useState<string | null>("");
+  const [userCalorieGoal, setUserCalorieGoal] = useState<string | null>("");
+  const [tdee, setTdee] = useState<number | null>(null);
+  
+
 
   // Placeholder function for form submission
 
@@ -15,7 +20,7 @@ const BMRCalculator: React.FC = () => {
     height: number,
     weight: number,
     userAge: number,
-    userSex: string
+    userSex: string,
   ) => {
     // Mifflin-St Jeor Equation
 
@@ -29,6 +34,14 @@ const BMRCalculator: React.FC = () => {
     return bmr;
   };
 
+
+  const calorieGoal = (goal: string, tdee: number) => {
+    const deficit = goal === '0.5' ? 250 : 500;
+    return tdee - deficit;
+  };
+
+
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const userHeight = parseFloat(height as string);
@@ -38,6 +51,9 @@ const BMRCalculator: React.FC = () => {
     if (!isNaN(userHeight) && !isNaN(userWeight) && !isNaN(userAge) && sex) {
       const bmr = calculateBMR(userHeight, userWeight, userAge, sex);
       setBmrResult(bmr);
+      const tdee = (bmr * parseFloat(activityLevel as string));
+      setTdee(tdee);
+      const userCalorieGoal = goal !== null && tdee !== null ? calorieGoal(goal, tdee) : null;
 
       // Construct the body of user data to be sent/updated
       const body = {
@@ -46,6 +62,9 @@ const BMRCalculator: React.FC = () => {
         age: userAge,
         sex: sex,
         bmr: bmr,
+        goal: goal,
+        activityLevel: activityLevel,
+        userCalorieGoal: userCalorieGoal,
       };
 
       try {
@@ -113,6 +132,26 @@ const BMRCalculator: React.FC = () => {
           onChange={setWeight}
           required
         />
+
+        <Select
+          label="How active are you?"
+          placeholder="Select your activity level"
+          value={activityLevel}
+          onChange={setActivityLevel}
+          data={[
+            { value: "1.2", label: "Sedentary (little or no exercise)" },
+            {
+              value: "1.375",
+              label: "Lightly active (light exercise/sporots 1-3 days/week)",
+              // add more options if we need
+            },
+            { value: "1.55", label: "Moderately active (moderate exercise/sports 3-5 days/week)"},
+            { value: "1.725", label: "Very active (hard exercise/sports 6-7 days a week)"},
+            { value: "1.9", label: "Extra active (very hard exercise/sports & physical job)"}
+          ]}
+          required
+        />  
+
 
         <Select
           label="Weight loss goal per week"

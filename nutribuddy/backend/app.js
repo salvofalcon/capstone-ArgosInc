@@ -100,7 +100,7 @@ app.post("/userData", async(req, res) => {
 });
 
 app.post("/complete-profile", async(req, res) => {
-    const {height, weight, age, sex, bmr} = req.body
+    const {height, weight, age, sex, bmr, goal, activityLevel, userCalorieGoal} = req.body
     const {token} = req.body;
 
     try {
@@ -121,7 +121,10 @@ app.post("/complete-profile", async(req, res) => {
             weight: weight,
             age: age,
             sex: sex,
-            bmr: bmr
+            bmr: bmr,
+            goal: goal,
+            activityLevel: activityLevel,
+            userCalorieGoal: userCalorieGoal,
         }, { new: true})
             .then((data) => {
                 res.send({status: "OK", data: data});

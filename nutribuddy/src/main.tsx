@@ -15,6 +15,10 @@ import { Login } from "./pages/LoginPage/Login.tsx";
 import { SignUp } from "./pages/SignUpPage/SignUp.tsx";
 import { UserHome } from "./pages/UserHomePage/UserHome.tsx";
 import { ForgotPasswordPage } from "./pages/ForgotPassword/ForgotPasswordPage.tsx";
+
+import CalorieGoalCalculator from "./pages/CalorieGoal/CalorieGoalCalculator.tsx";
+import BMRCalculator from "./pages/CalorieGoal/CalorieGoalCalculator.tsx";
+
 import { FoodLookup } from "./pages/FoodLookupPage/FoodLookup.tsx";
 import { Logo } from "./components/Logo/Logo.tsx";
 
@@ -51,6 +55,10 @@ const router = createBrowserRouter([
     element: <ForgotPasswordPage />,
   },
   {
+    path: "/bmr-calculator",
+    element: <BMRCalculator />,
+  },
+  {
     path: "/foodLookup",
     element: isLoggedIn == "true" ? <FoodLookup /> : <Navigate to="/login" />,
   },
@@ -59,7 +67,6 @@ const router = createBrowserRouter([
     element: <Logo />,
   },
 ]);
-
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <MantineProvider theme={theme} defaultColorScheme="dark">

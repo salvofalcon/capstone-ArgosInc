@@ -100,6 +100,66 @@ app.post("/userData", async(req, res) => {
     }
 });
 
+app.post("/complete-profile", async(req, res) => {
+    const {height, weight, age, sex, bmr, goal, activityLevel, userCalorieGoal} = req.body
+    const {token} = req.body;
+
+    try {
+        const user = jwt.verify(token, JWT_SECRET, (err, res) => {
+            if(err) {
+                return "token expired";
+            }
+            return res;
+        });
+        console.log(user)
+        if(user == "token expired") {
+            return res.send({status: "error", data: "token expired"});
+        }
+
+        const useremail = user.email;
+        User.findOneAndUpdate({email: useremail}, {
+            height: height,
+            weight: weight,
+            age: age,
+            sex: sex,
+            bmr: bmr,
+            goal: goal,
+            activityLevel: activityLevel,
+            userCalorieGoal: userCalorieGoal,
+        }, { new: true})
+            .then((data) => {
+                res.send({status: "OK", data: data});
+            })
+            .catch((error) => {
+                res.send({status: "error", data: error});
+            })
+    } catch(error) {
+        res.send({status: "ERROR"})
+    }
+        
+});
+
+// app.post("/completeProfile", async(req, res) => {
+//     //Get user ID from request
+//     const userId = req.user.id;
+
+//     try {
+//         //find the user by ID and update with new profile info
+//         const updatedUser = await User.findByIdAndUpdate(userId, {
+//             height: req.body.height,
+//             weight: req.body.weight,
+//             age: req.body.age,
+//             sex: req.body.sex,
+//             bmr: req.body.bmr
+//         }, { new: true});
+        
+//         res.json(updatedUser);
+//     } catch (error) {
+//         res.status(500).json({message: 'Error updating profile', error: error});
+//     }
+
+// });
+
 app.post("/forgot-password", async(req, res) => {
     const {email} = req.body;
     try {

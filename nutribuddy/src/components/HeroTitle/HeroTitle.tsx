@@ -89,7 +89,7 @@ export function HeroTitle() {
         <div className={classes.body2}>
           <Container p="xl">
             <Title className={classes.title2} p="xl">
-              Our Mission Blockquote
+              Placeholder
             </Title>
             <Text fz="md">
               We offer a comprehensive range of services in the Diet & Nutrition

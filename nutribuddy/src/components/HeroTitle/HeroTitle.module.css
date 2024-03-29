@@ -4,6 +4,16 @@
     background-color: light-dark(var(--mantine-color-white), var(--mantine-color-dark-7));
     text-align: center;
   }
+  .videoBackground {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.5;
+    object-position: center top;
+  }
   
   .inner {
     position: relative;
@@ -65,4 +75,68 @@
       padding-right: rem(18px);
       flex: 1;
     }
+  }
+
+  .wrapper2 {
+    display: flex;
+    align-items: center;
+    padding: calc(var(--mantine-spacing-xl) * 2);
+    border-radius: var(--mantine-radius-md);
+    background-color: light-dark(var(--mantine-color-white), var(--mantine-color-dark-8));
+    border: rem(1px) solid light-dark(var(--mantine-color-gray-3), var(--mantine-color-dark-8));
+    position: relative;
+    z-index: 1;
+  
+    @media (max-width: $mantine-breakpoint-sm) {
+      flex-direction: column-reverse;
+      padding: var(--mantine-spacing-xl);
+    }
+  }
+  
+  .image2 {
+    max-width: 40%;
+    border-radius: 10px;
+  
+    @media (max-width: $mantine-breakpoint-sm) {
+      max-width: 100%;
+    }
+  }
+  
+  .body2 {
+    padding-right: calc(var(--mantine-spacing-xl) * 4);
+  
+    @media (max-width: $mantine-breakpoint-sm) {
+      padding-right: 0;
+      margin-top: var(--mantine-spacing-xl);
+    }
+  }
+  
+  .title2 {
+    color: light-dark(var(--mantine-color-black), var(--mantine-color-white));
+    font-family:
+      Greycliff CF,
+      var(--mantine-font-family);
+    line-height: 1;
+    margin-bottom: var(--mantine-spacing-md);
+  }
+  
+  .controls2 {
+    display: flex;
+    margin-top: var(--mantine-spacing-xl);
+  }
+  
+  .inputWrapper2 {
+    width: 100%;
+    flex: 1;
+  }
+  
+  .input2 {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-right: 0;
+  }
+  
+  .control2 {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
   }

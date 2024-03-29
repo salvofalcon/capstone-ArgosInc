@@ -107,11 +107,11 @@ export function FoodModal(props: ModalProps) {
             </Center>
           )}
 
-          <Button>Add Food</Button>
+          <Button style={{ backgroundColor: "#22B37B" }}>Add Food</Button>
         </Stack>
       </Modal>
 
-      <Button onClick={open} radius="xl">
+      <Button style={{ backgroundColor: "#22B37B" }} onClick={open} radius="xl">
         Add Food
       </Button>
     </div>

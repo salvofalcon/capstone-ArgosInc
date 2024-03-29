@@ -133,7 +133,11 @@ export default class SignUp extends Component<
             </div>
 
             <Center pt="lg">
-              <Button type="submit" radius="xl">
+              <Button
+                style={{ backgroundColor: "#22B37B" }}
+                type="submit"
+                radius="xl"
+              >
                 Sign Up
               </Button>
             </Center>

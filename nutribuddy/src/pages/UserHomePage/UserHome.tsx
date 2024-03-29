@@ -1,6 +1,7 @@
 import { AppShell, Button, Center, Paper, Title } from "@mantine/core";
 import { HeaderMegaMenu } from "../../components/HeaderMegaMenu/HeaderMegaMenu";
 import UserHomeComponent from "../../components/UserHome/UserHome";
+import { Footer } from "../../components/Footer/Footer";
 
 export function UserHome() {
   return (
@@ -14,6 +15,8 @@ export function UserHome() {
           <UserHomeComponent />
         </Center>
       </AppShell.Main>
+
+      <Footer />
     </AppShell>
   );
 }

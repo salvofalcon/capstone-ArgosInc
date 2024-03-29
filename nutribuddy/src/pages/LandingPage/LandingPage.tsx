@@ -2,6 +2,7 @@ import "./LandingPage.css";
 import { HeaderMegaMenu } from "../../components/HeaderMegaMenu/HeaderMegaMenu";
 import { HeroTitle } from "../../components/HeroTitle/HeroTitle";
 import { AppShell } from "@mantine/core";
+import { Footer } from "../../components/Footer/Footer";
 
 function App() {
   return (
@@ -15,7 +16,6 @@ function App() {
           //collapsed: { mobile: !opened },
         }}
         */
-        padding="md"
       >
         <AppShell.Header>
           <HeaderMegaMenu />
@@ -26,6 +26,8 @@ function App() {
         <AppShell.Main>
           <HeroTitle />
         </AppShell.Main>
+
+        <Footer />
       </AppShell>
     </>
   );

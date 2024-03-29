@@ -20,7 +20,7 @@ import CalorieGoalCalculator from "./pages/CalorieGoal/CalorieGoalCalculator.tsx
 import BMRCalculator from "./pages/CalorieGoal/CalorieGoalCalculator.tsx";
 
 import { FoodLookup } from "./pages/FoodLookupPage/FoodLookup.tsx";
-
+import { Logo } from "./components/Logo/Logo.tsx";
 
 const theme = createTheme({
   /** Put your mantine theme override here */
@@ -55,18 +55,18 @@ const router = createBrowserRouter([
     element: <ForgotPasswordPage />,
   },
   {
-
     path: "/bmr-calculator",
     element: <BMRCalculator />,
   },
   {
-   
     path: "/foodLookup",
     element: isLoggedIn == "true" ? <FoodLookup /> : <Navigate to="/login" />,
   },
-
+  {
+    path: "/logo",
+    element: <Logo />,
+  },
 ]);
-
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <MantineProvider theme={theme} defaultColorScheme="dark">

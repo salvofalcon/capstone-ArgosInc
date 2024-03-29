@@ -44,7 +44,12 @@ export default class UserHome extends Component<object, { userData: any }> {
           Name<h1>{this.state.userData.fname}</h1>
           Email<h1>{this.state.userData.email}</h1>
           <Center>
-            <Button onClick={this.logOut}>Sign out</Button>
+            <Button
+              style={{ backgroundColor: "#22B37B" }}
+              onClick={this.logOut}
+            >
+              Sign out
+            </Button>
           </Center>
         </Paper>
       </>

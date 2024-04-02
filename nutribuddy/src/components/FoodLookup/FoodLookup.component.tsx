@@ -1,20 +1,12 @@
 import { Component } from "react";
 import {
   TextInput,
-  PasswordInput,
   Text,
   Paper,
-  Group,
   Button,
   Divider,
-  Anchor,
   Stack,
-  Title,
   Center,
-  Container,
-  ThemeIcon,
-  rem,
-  Modal,
 } from "@mantine/core";
 import classes from "./FoodLookup.module.css";
 import { FoodModal } from "../FoodModal/FoodModal";

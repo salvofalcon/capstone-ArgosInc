@@ -20,6 +20,7 @@ import CalorieGoalCalculator from "./pages/CalorieGoal/CalorieGoalCalculator.tsx
 import BMRCalculator from "./pages/CalorieGoal/CalorieGoalCalculator.tsx";
 
 import { FoodLookup } from "./pages/FoodLookupPage/FoodLookup.tsx";
+import { Dashboard } from "./pages/Dashboard/Dashboard.tsx";
 
 
 const theme = createTheme({
@@ -63,6 +64,10 @@ const router = createBrowserRouter([
    
     path: "/foodLookup",
     element: isLoggedIn == "true" ? <FoodLookup /> : <Navigate to="/login" />,
+  },
+  {
+    path: "/Dashboard",
+    element: isLoggedIn == "true" ? <Dashboard /> : <Navigate to="/login" />,
   },
 
 ]);

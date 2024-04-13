@@ -1,5 +1,5 @@
 import React, { Component, ReactNode } from "react";
-import { Button, Center, Paper } from "@mantine/core";
+import { Button, Center, Paper, Stack } from "@mantine/core";
 import { DatePicker } from "../DatePicker/DatePicker";
 import { rem } from "@mantine/core";
 import { IconCalendar } from "@tabler/icons-react";
@@ -94,16 +94,17 @@ export default class Diary extends Component<
   //     }
   //   };
 
-  renderEntries = () => {
+  renderBreakfastEntries = () => {
     const { userData, selectedDate } = this.state;
     if (userData.entries && userData.entries.length > 0) {
       const entriesForSelectedDate = userData.entries.filter(
-        (entry: { date: string | number | Date }) => {
+        (entry: { mealType: string; date: string | number | Date }) => {
           const entryDate = new Date(entry.date);
           return (
             entryDate.getFullYear() === selectedDate.getFullYear() &&
             entryDate.getMonth() === selectedDate.getMonth() &&
-            entryDate.getDate() === selectedDate.getDate()
+            entryDate.getDate() === selectedDate.getDate() &&
+            entry.mealType === "Breakfast"
           );
         }
       );
@@ -130,14 +131,65 @@ export default class Diary extends Component<
             index: React.Key | null | undefined
           ) => (
             <div key={index}>
-              <h2>Food Name: {entry.foodName}</h2>
-              <p>Calories: {entry.calories}</p>
+              <h3>{entry.foodName}</h3>
+              <p>Calories: {entry.calories.toFixed()}</p>
               {/* Render other fields of the entry here */}
             </div>
           )
         );
       } else {
-        return <h2>No entries found for the selected date</h2>;
+        return <p>No breakfast entries found for the selected date</p>;
+      }
+    } else {
+      return <h2>No entries found</h2>;
+    }
+  };
+
+  renderLunchEntries = () => {
+    const { userData, selectedDate } = this.state;
+    if (userData.entries && userData.entries.length > 0) {
+      const entriesForSelectedDate = userData.entries.filter(
+        (entry: { mealType: string; date: string | number | Date }) => {
+          const entryDate = new Date(entry.date);
+          return (
+            entryDate.getFullYear() === selectedDate.getFullYear() &&
+            entryDate.getMonth() === selectedDate.getMonth() &&
+            entryDate.getDate() === selectedDate.getDate() &&
+            entry.mealType === "Lunch"
+          );
+        }
+      );
+
+      if (entriesForSelectedDate.length > 0) {
+        return entriesForSelectedDate.map(
+          (
+            entry: {
+              calories: number;
+              foodName: string | number | null | undefined;
+              date:
+                | string
+                | number
+                | boolean
+                | React.ReactElement<
+                    any,
+                    string | React.JSXElementConstructor<any>
+                  >
+                | Iterable<React.ReactNode>
+                | React.ReactPortal
+                | null
+                | undefined;
+            },
+            index: React.Key | null | undefined
+          ) => (
+            <div key={index}>
+              <h3>Food Name: {entry.foodName}</h3>
+              <p>Calories: {entry.calories.toFixed()}</p>
+              {/* Render other fields of the entry here */}
+            </div>
+          )
+        );
+      } else {
+        return <p>No lunch entries found for the selected date</p>;
       }
     } else {
       return <h2>No entries found</h2>;
@@ -145,7 +197,6 @@ export default class Diary extends Component<
   };
 
   handleDateChange = (date: Date | null) => {
-    // Update selectedDate state when date changes
     this.setState({ selectedDate: date });
     //console.log(date?.toISOString());
   };
@@ -156,20 +207,52 @@ export default class Diary extends Component<
     );
     return (
       <>
-        <Paper withBorder shadow="sm" radius="md" p="lg">
+        <Paper shadow="sm" radius="md" p="lg">
+          <Center>
+            <h1>Your Food Diary</h1>
+          </Center>
           <DatePickerInput
             leftSection={icon}
             leftSectionPointerEvents="none"
             label="Select date"
             placeholder="Select date"
             value={this.state.selectedDate}
-            onChange={this.handleDateChange} // Pass callback function to handle date change
+            onChange={this.handleDateChange}
           />
-          {this.renderEntries()}
-          {/*
-          Email<h1>{this.state.userData.email}</h1>
-          Date<h1>{this.state.selectedDate?.toLocaleDateString()}</h1>
-    */}
+          <Stack>
+            <Paper withBorder p="lg" mt="lg">
+              <h2>Breakfast</h2>
+              {this.renderBreakfastEntries()}
+              <Button color="green" variant="transparent" radius="lg">
+                Add Food
+              </Button>
+            </Paper>
+
+            <Paper withBorder p="lg" mt="lg">
+              <h2>Lunch</h2>
+              {this.renderLunchEntries()}
+              <Button color="green" variant="transparent" radius="lg">
+                Add Food
+              </Button>
+            </Paper>
+
+            <Paper withBorder p="lg" mt="lg">
+              <h2>Dinner</h2>
+              {this.renderLunchEntries()}
+              <Button color="green" variant="transparent" radius="lg">
+                Add Food
+              </Button>
+            </Paper>
+
+            <Paper withBorder p="lg" mt="lg">
+              <h2>Snacks</h2>
+              {this.renderLunchEntries()}
+              <Button color="green" variant="transparent" radius="lg">
+                Add Food
+              </Button>
+            </Paper>
+          </Stack>
+
           <Center>
             <Button
               style={{ backgroundColor: "#22B37B" }}

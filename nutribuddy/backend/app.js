@@ -24,6 +24,7 @@ mongoose.connect(process.env.DB_CONNECTION_STRING)
 .catch(e => console.log("ERROR: Could not connect to MongoDB."))
 
 require("./userDetails");
+require("./DailyCalorieRecord");
 
 const User = mongoose.model("UserInfo");
 

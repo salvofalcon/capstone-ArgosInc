@@ -17,7 +17,6 @@ import {
   rem,
   useMantineTheme,
 } from "@mantine/core";
-import { MantineLogo } from "@mantinex/mantine-logo";
 import { useDisclosure } from "@mantine/hooks";
 import {
   IconNotification,
@@ -107,7 +106,6 @@ export function HeaderMegaMenu() {
     <Box pb={120}>
       <header className={classes.header}>
         <Group justify="space-between" h="100%">
-          <MantineLogo size={30} />
 
           <Group h="100%" gap={0} visibleFrom="sm">
             <Link to="/" className={classes.link}>
@@ -172,9 +170,13 @@ export function HeaderMegaMenu() {
             <a href="#" className={classes.link}>
               Track Calories
             </a>
+            <Link to ="/dashboard" className={classes.link}>
+              Dashboard
+            </Link>
             <Link to="/assistant" className={classes.link}>
               AI Assistant
             </Link>
+  
           </Group>
 
           {isLoggedIn == "true" ? (

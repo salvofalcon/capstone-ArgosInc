@@ -1,7 +1,8 @@
 // src/pages/Dashboard/Dashboard.tsx
 
 import React, { useState, useEffect } from "react";
-import { Container, Text, RingProgress, Title } from '@mantine/core';
+import { Button, AppShell, Container, Text, RingProgress, Title, Paper } from '@mantine/core';
+import { HeaderMegaMenu } from "../../components/HeaderMegaMenu/HeaderMegaMenu";  // Adjust the path as necessary
 
 interface DashboardProps {
   // Props definition if needed
@@ -32,9 +33,6 @@ export const Dashboard: React.FC<DashboardProps> = (props) => {
       const userData = await response.json();
       setCalorieGoal(userData.data.userCalorieGoal); // Update state with fetched calorie goal
 
-      // No need to call setCaloriesRemaining here
-      // since it will be called in the useEffect below
-
     } catch (error) {
       console.error('Failed to fetch user data: ', error);
     }
@@ -45,31 +43,82 @@ export const Dashboard: React.FC<DashboardProps> = (props) => {
   }, []);
 
   useEffect(() => {
-    // This useEffect will update caloriesRemaining when calorieGoal or caloriesConsumed change
     setCaloriesRemaining(calorieGoal - caloriesConsumed);
-  }, [calorieGoal, caloriesConsumed]); // Dependency array
+  }, [calorieGoal, caloriesConsumed]);
 
-  // Determine the progress percentage
   const progress = (caloriesConsumed / calorieGoal) * 100;
 
+  const titleStyle = {
+    fontSize: '3rem', // Make title bigger
+    fontWeight: 700,
+    color: '#19c26b', // Use a custom color for the title
+    margin: '20px 0',
+  };
+  
+  const textStyle = {
+    fontSize: '1.5rem', // Increase the font size for text
+    color: 'white', // Slightly darker text for better readability
+    margin: 'white', // Add more vertical space between text elements
+  };
+  
+  const buttonStyle = {
+    marginTop: '30px', // Increase space above the button
+    fontSize: '1.25rem', // Larger button text
+  };
+  
+
+  const navigateToFoodDiary = () => {
+    // Logic to navigate to the food diary page will go here
+    console.log("Navigate to the food diary page");
+  };
+
   return (
-    <Container size="lg" mt="md">
-      <Title order={1}>Your Dashboard</Title>
-      <Text>Calorie Goal: {calorieGoal}</Text>
-      <Text>Calories Consumed: {caloriesConsumed}</Text>
-      <Text>Calories Remaining: {caloriesRemaining}</Text>
-      <RingProgress
-  sections={[{ value: progress, color: 'blue' }]}
-  label={
-    <Text color="blue" size="xl" style={{ textAlign: 'center' }}>
-      {`${Math.round(progress)}%`}
-    </Text>
-  }
-  size={200}
-  thickness={8}
-  roundCaps={true}
-/>
-    </Container>
+    <AppShell
+      header={{
+        height: 60,
+      }}
+      padding="md"
+    >
+
+<AppShell.Header>
+          <HeaderMegaMenu />
+        </AppShell.Header>
+
+
+      <Container size="lg" mt="md" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh' }}>
+        <Paper
+          shadow="sm"
+          radius="md"
+          p="lg"
+          withBorder
+          style={{ marginTop: 10 }}
+        >
+          <Title style={titleStyle}>Your Dashboard</Title>
+          <Text style={textStyle}>Calorie Goal: {calorieGoal}</Text>
+          <Text style={textStyle}>Calories Consumed: {caloriesConsumed}</Text>
+          <Text style={textStyle}>Calories Remaining: {caloriesRemaining}</Text>
+          <RingProgress
+            sections={[{ value: progress, color: '#19c26b' }]}
+            label={
+              <Text color="#19c26b" size="xl" style={{ textAlign: 'center' }}>
+                {`${Math.round(progress)}%`}
+              </Text>
+            }
+            size={200}
+            thickness={8}
+            roundCaps={true}
+          />
+          
+        </Paper>
+        <Button style={buttonStyle}
+          onClick={navigateToFoodDiary}
+          variant="filled"
+          color='#19c26b'
+        >
+          Log Meals
+        </Button>
+      </Container>
+    </AppShell>
   );
 };
 

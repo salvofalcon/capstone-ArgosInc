@@ -14,7 +14,7 @@ export default class Diary extends Component<
   constructor(props: any) {
     super(props);
     this.state = {
-      userData: "",
+      userData: null,
       selectedDate: new Date(),
       calories: 0,
     };
@@ -50,7 +50,7 @@ export default class Diary extends Component<
 
   renderBreakfastEntries = () => {
     const { userData, selectedDate } = this.state;
-    if (userData.entries && userData.entries.length > 0) {
+    if (userData && userData.entries && userData.entries.length > 0) {
       const entriesForSelectedDate = userData.entries.filter(
         (entry: { mealType: string; date: string | number | Date }) => {
           const entryDate = new Date(entry.date);
@@ -62,7 +62,7 @@ export default class Diary extends Component<
           );
         }
       );
-
+  
       if (entriesForSelectedDate.length > 0) {
         return entriesForSelectedDate.map(
           (
@@ -85,7 +85,7 @@ export default class Diary extends Component<
             index: React.Key | null | undefined
           ) => (
             <div key={index}>
-              <h3>{entry.foodName}</h3>
+              <h3>Food Name: {entry.foodName}</h3>
               <p>Calories: {entry.calories.toFixed()}</p>
             </div>
           )
@@ -97,10 +97,9 @@ export default class Diary extends Component<
       return <h2>No entries found</h2>;
     }
   };
-
   renderLunchEntries = () => {
     const { userData, selectedDate } = this.state;
-    if (userData.entries && userData.entries.length > 0) {
+    if (userData && userData.entries && userData.entries.length > 0) {
       const entriesForSelectedDate = userData.entries.filter(
         (entry: { mealType: string; date: string | number | Date }) => {
           const entryDate = new Date(entry.date);
@@ -112,7 +111,7 @@ export default class Diary extends Component<
           );
         }
       );
-
+  
       if (entriesForSelectedDate.length > 0) {
         return entriesForSelectedDate.map(
           (
@@ -150,7 +149,7 @@ export default class Diary extends Component<
 
   renderDinnerEntries = () => {
     const { userData, selectedDate } = this.state;
-    if (userData.entries && userData.entries.length > 0) {
+    if (userData && userData.entries && userData.entries.length > 0) {
       const entriesForSelectedDate = userData.entries.filter(
         (entry: { mealType: string; date: string | number | Date }) => {
           const entryDate = new Date(entry.date);
@@ -162,7 +161,7 @@ export default class Diary extends Component<
           );
         }
       );
-
+  
       if (entriesForSelectedDate.length > 0) {
         return entriesForSelectedDate.map(
           (
@@ -200,7 +199,7 @@ export default class Diary extends Component<
 
   renderSnackEntries = () => {
     const { userData, selectedDate } = this.state;
-    if (userData.entries && userData.entries.length > 0) {
+    if (userData && userData.entries && userData.entries.length > 0) {
       const entriesForSelectedDate = userData.entries.filter(
         (entry: { mealType: string; date: string | number | Date }) => {
           const entryDate = new Date(entry.date);
@@ -212,7 +211,7 @@ export default class Diary extends Component<
           );
         }
       );
-
+  
       if (entriesForSelectedDate.length > 0) {
         return entriesForSelectedDate.map(
           (
@@ -259,7 +258,11 @@ export default class Diary extends Component<
     );
 
     let totalCalories = 0;
-    if (this.state.userData.entries && this.state.userData.entries.length > 0) {
+    if (
+      this.state.userData &&
+      this.state.userData.entries &&
+      this.state.userData.entries.length > 0
+    ) {
       const { selectedDate } = this.state;
       const entriesForSelectedDate = this.state.userData.entries.filter(
         (entry: { date: string | number | Date }) => {
@@ -277,6 +280,7 @@ export default class Diary extends Component<
         0
       );
     }
+
     return (
       <>
         <Container>
@@ -292,51 +296,57 @@ export default class Diary extends Component<
             onChange={this.handleDateChange}
           />
           <h2>Calories Consumed: {totalCalories.toFixed()}</h2>
-          <Stack>
-            <Paper withBorder p="lg" mt="lg">
-              <h2>Breakfast</h2>
-              <hr></hr>
-              {this.renderBreakfastEntries()}
-              <Link to="/foodLookup">
-                <Button color="green" variant="transparent" radius="lg">
-                  Add Food
-                </Button>
-              </Link>
-            </Paper>
+          {this.state.userData &&
+          this.state.userData.entries &&
+          this.state.userData.entries.length > 0 ? (
+            <Stack>
+              <Paper withBorder p="lg" mt="lg">
+                <h2>Breakfast</h2>
+                <hr></hr>
+                {this.renderBreakfastEntries()}
+                <Link to="/foodLookup">
+                  <Button color="green" variant="transparent" radius="lg">
+                    Add Food
+                  </Button>
+                </Link>
+              </Paper>
 
-            <Paper withBorder p="lg" mt="lg">
-              <h2>Lunch</h2>
-              <hr></hr>
-              {this.renderLunchEntries()}
-              <Link to="/foodLookup">
-                <Button color="green" variant="transparent" radius="lg">
-                  Add Food
-                </Button>
-              </Link>
-            </Paper>
+              <Paper withBorder p="lg" mt="lg">
+                <h2>Lunch</h2>
+                <hr></hr>
+                {this.renderLunchEntries()}
+                <Link to="/foodLookup">
+                  <Button color="green" variant="transparent" radius="lg">
+                    Add Food
+                  </Button>
+                </Link>
+              </Paper>
 
-            <Paper withBorder p="lg" mt="lg">
-              <h2>Dinner</h2>
-              <hr></hr>
-              {this.renderDinnerEntries()}
-              <Link to="/foodLookup">
-                <Button color="green" variant="transparent" radius="lg">
-                  Add Food
-                </Button>
-              </Link>
-            </Paper>
+              <Paper withBorder p="lg" mt="lg">
+                <h2>Dinner</h2>
+                <hr></hr>
+                {this.renderDinnerEntries()}
+                <Link to="/foodLookup">
+                  <Button color="green" variant="transparent" radius="lg">
+                    Add Food
+                  </Button>
+                </Link>
+              </Paper>
 
-            <Paper withBorder p="lg" mt="lg">
-              <h2>Snacks</h2>
-              <hr></hr>
-              {this.renderSnackEntries()}
-              <Link to="/foodLookup">
-                <Button color="green" variant="transparent" radius="lg">
-                  Add Food
-                </Button>
-              </Link>
-            </Paper>
-          </Stack>
+              <Paper withBorder p="lg" mt="lg">
+                <h2>Snacks</h2>
+                <hr></hr>
+                {this.renderSnackEntries()}
+                <Link to="/foodLookup">
+                  <Button color="green" variant="transparent" radius="lg">
+                    Add Food
+                  </Button>
+                </Link>
+              </Paper>
+            </Stack>
+          ) : (
+            <h2>No entries found</h2>
+          )}
         </Container>
       </>
     );

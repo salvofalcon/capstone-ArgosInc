@@ -53,8 +53,7 @@ const BMRCalculator: React.FC = () => {
       setBmrResult(bmr);
       const tdee = (bmr * parseFloat(activityLevel as string));
       setTdee(tdee);
-      const userCalorieGoal = goal !== null && tdee !== null ? calorieGoal(goal, tdee) : null;
-
+      const userCalorieGoal = goal !== null && tdee !== null ? Math.ceil(calorieGoal(goal, tdee)) : null;
       // Construct the body of user data to be sent/updated
       const body = {
         height: userHeight,

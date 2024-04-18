@@ -16,6 +16,7 @@ const UserDetailsSchema = new mongoose.Schema(
         activityLevel: String,
         goal: String,
         userCalorieGoal: String,
+        caloriesConsumedToday: Number,
     },
     {
         collection: "UserInfo"

@@ -18,7 +18,6 @@ import {
   rem,
   useMantineTheme,
 } from "@mantine/core";
-import { MantineLogo } from "@mantinex/mantine-logo";
 import { useDisclosure } from "@mantine/hooks";
 import {
   IconNotification,
@@ -175,6 +174,9 @@ export function HeaderMegaMenu() {
             <a href="#" className={classes.link}>
               Track Calories
             </a>
+            <Link to="/dashboard" className={classes.link}>
+              Dashboard
+            </Link>
             <Link to="/assistant" className={classes.link}>
               AI Assistant
             </Link>

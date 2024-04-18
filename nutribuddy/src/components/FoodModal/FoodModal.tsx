@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { useDisclosure } from "@mantine/hooks";
 import {
   Modal,
@@ -11,7 +12,7 @@ import {
   Center,
 } from "@mantine/core";
 import classes from "./FoodModal.module.css";
-import { useState } from "react";
+import axios from "axios"; // Import Axios for making HTTP requests
 
 type Serving = {
   value: string;
@@ -32,15 +33,14 @@ export function FoodModal(props: ModalProps) {
   const [opened, { open, close }] = useDisclosure(false);
   const [selectedServing, setSelectedServing] = useState<Serving | null>(null);
   const [servingsNumber, setServingsNumber] = useState<number>(1);
+  const [mealType, setMealType] = useState<string>("");
 
   const handleServingSelect = (value: string | null, option: ComboboxItem) => {
     if (value !== null) {
-      // Find the selected serving in the servingsData array
       const serving = props.servingsData.find(
         (serving) => serving.value === value
       );
       if (serving) {
-        // Update the selectedServing state with the selected serving
         setSelectedServing(serving);
       }
     }
@@ -49,6 +49,52 @@ export function FoodModal(props: ModalProps) {
   const handleNumServingsChange = (value: string | number) => {
     const numValue = typeof value === "string" ? parseInt(value, 10) : value;
     setServingsNumber(numValue);
+  };
+
+  const handleMealTypeChange = (value: string | null) => {
+    if (value !== null) {
+      setMealType(value);
+    }
+  };
+
+  const handleSubmit = async () => {
+    if (!selectedServing) {
+      console.error("No serving selected");
+      return;
+    }
+    if (!servingsNumber) {
+      console.error("No servings number selected");
+      return;
+    }
+    try {
+      const token = localStorage.getItem("token"); // Retrieve token from localStorage
+      const payload = {
+        entries: [
+          {
+            foodName: props.title,
+            quantity: servingsNumber,
+            mealType: mealType,
+            date: new Date(),
+            calories: props.calories * selectedServing.scale * servingsNumber,
+            carbs: props.carbs * selectedServing.scale * servingsNumber,
+            fat: props.fat * selectedServing.scale * servingsNumber,
+            protein: props.protein * selectedServing.scale * servingsNumber,
+          },
+        ],
+        token: token,
+      };
+
+      console.log("Payload: ", payload);
+      const response = await axios.post(
+        "http://localhost:5000/food-diary",
+        payload
+      );
+      console.log("Response: ", response.data);
+      close(); // Close the modal after successful submission
+    } catch (error) {
+      console.error("Error adding food:", error);
+      // Handle error appropriately, e.g., display error message
+    }
   };
 
   return (
@@ -74,10 +120,10 @@ export function FoodModal(props: ModalProps) {
             label="Meal"
             placeholder="Select a Meal"
             data={["Breakfast", "Lunch", "Dinner", "Snacks"]}
+            onChange={handleMealTypeChange}
           />
 
-          {/* Display the calories based on serving scale */}
-          {selectedServing && (
+          {selectedServing && servingsNumber && (
             <Center>
               <div style={{ display: "flex" }}>
                 <Text>
@@ -107,11 +153,13 @@ export function FoodModal(props: ModalProps) {
             </Center>
           )}
 
-          <Button>Add Food</Button>
+          <Button style={{ backgroundColor: "#22B37B" }} onClick={handleSubmit}>
+            Add Food
+          </Button>
         </Stack>
       </Modal>
 
-      <Button onClick={open} radius="xl">
+      <Button style={{ backgroundColor: "#22B37B" }} onClick={open} radius="xl">
         Add Food
       </Button>
     </div>

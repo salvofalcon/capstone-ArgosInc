@@ -2,6 +2,7 @@ import { AppShell, Center, Title } from "@mantine/core";
 import { HeaderMegaMenu } from "../../components/HeaderMegaMenu/HeaderMegaMenu";
 import classes from "./SignUp.module.css";
 import SignUpComponent from "../../components/SignUp/SignUp.component";
+import { Footer } from "../../components/Footer/Footer";
 
 export function SignUp() {
   return (
@@ -15,6 +16,8 @@ export function SignUp() {
           <SignUpComponent />
         </Center>
       </AppShell.Main>
+
+      <Footer />
     </AppShell>
   );
 }

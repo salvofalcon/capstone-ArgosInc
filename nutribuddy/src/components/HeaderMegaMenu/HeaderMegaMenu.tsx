@@ -14,6 +14,7 @@ import {
   Drawer,
   Collapse,
   ScrollArea,
+  Image,
   rem,
   useMantineTheme,
 } from "@mantine/core";
@@ -30,6 +31,7 @@ import {
 import classes from "./HeaderMegaMenu.module.css";
 import { ThemeToggle } from "../ThemeToggle/ThemeToggle";
 import { Link } from "react-router-dom";
+import { Logo } from "../Logo/Logo";
 
 /*
 const mockdata = [
@@ -106,6 +108,8 @@ export function HeaderMegaMenu() {
     <Box pb={120}>
       <header className={classes.header}>
         <Group justify="space-between" h="100%">
+          {/* <MantineLogo size={30} /> */}
+          <Logo />
 
           <Group h="100%" gap={0} visibleFrom="sm">
             <Link to="/" className={classes.link}>
@@ -170,18 +174,19 @@ export function HeaderMegaMenu() {
             <a href="#" className={classes.link}>
               Track Calories
             </a>
-            <Link to ="/dashboard" className={classes.link}>
+            <Link to="/dashboard" className={classes.link}>
               Dashboard
             </Link>
             <Link to="/assistant" className={classes.link}>
               AI Assistant
             </Link>
-  
           </Group>
 
           {isLoggedIn == "true" ? (
             <Group visibleFrom="sm">
-              <Button onClick={logOut}>Sign out</Button>
+              <Button style={{ backgroundColor: "#22B37B" }} onClick={logOut}>
+                Sign out
+              </Button>
               <ThemeToggle />
             </Group>
           ) : (
@@ -190,7 +195,7 @@ export function HeaderMegaMenu() {
                 <Button variant="default">Log in</Button>
               </Link>
               <Link to="/signup">
-                <Button>Sign up</Button>
+                <Button style={{ backgroundColor: "#22B37B" }}>Sign up</Button>
               </Link>
               <ThemeToggle />
             </Group>

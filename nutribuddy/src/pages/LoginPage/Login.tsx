@@ -2,6 +2,7 @@ import { AppShell, Center, Title } from "@mantine/core";
 import { HeaderMegaMenu } from "../../components/HeaderMegaMenu/HeaderMegaMenu";
 import classes from "./Login.module.css";
 import LoginComponent from "../../components/Login/Login.component";
+import { Footer } from "../../components/Footer/Footer";
 
 export function Login() {
   return (
@@ -15,6 +16,8 @@ export function Login() {
           <LoginComponent />
         </Center>
       </AppShell.Main>
+
+      <Footer />
     </AppShell>
   );
 }

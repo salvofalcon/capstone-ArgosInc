@@ -2,7 +2,7 @@
 import { HeaderMegaMenu } from "../../components/HeaderMegaMenu/HeaderMegaMenu";
 import { Paper } from '@mantine/core';
 import { AppShell } from "@mantine/core";
-
+import { Footer } from "../../components/Footer/Footer";
 
 const AIAssistant: React.FC = () => {
   return (
@@ -55,6 +55,8 @@ const AIAssistant: React.FC = () => {
           </Paper>
         </AppShell.Main>
       </AppShell>
+
+      <Footer />
     </>
   );
 };

@@ -24,9 +24,10 @@ mongoose.connect(process.env.DB_CONNECTION_STRING)
 .catch(e => console.log("ERROR: Could not connect to MongoDB."))
 
 require("./userDetails");
-
+require("./diaryDetails");
 
 const User = mongoose.model("UserInfo");
+const Diary = mongoose.model("DiaryInfo")
 
 app.post("/register", async(req, res) => {
     const {fname, lname, password, email} = req.body
@@ -112,7 +113,7 @@ app.post("/complete-profile", async(req, res) => {
             }
             return res;
         });
-        console.log(user)
+        //console.log(user)
         if(user == "token expired") {
             return res.send({status: "error", data: "token expired"});
         }
@@ -139,27 +140,6 @@ app.post("/complete-profile", async(req, res) => {
     }
         
 });
-
-// app.post("/completeProfile", async(req, res) => {
-//     //Get user ID from request
-//     const userId = req.user.id;
-
-//     try {
-//         //find the user by ID and update with new profile info
-//         const updatedUser = await User.findByIdAndUpdate(userId, {
-//             height: req.body.height,
-//             weight: req.body.weight,
-//             age: req.body.age,
-//             sex: req.body.sex,
-//             bmr: req.body.bmr
-//         }, { new: true});
-        
-//         res.json(updatedUser);
-//     } catch (error) {
-//         res.status(500).json({message: 'Error updating profile', error: error});
-//     }
-
-// });
 
 app.post("/forgot-password", async(req, res) => {
     const {email} = req.body;
@@ -266,8 +246,59 @@ app.post("/search-food", async (req, res) => {
     }
 });
 
+app.post("/food-diary", async (req, res) => {
+    const { entries, token } = req.body;
+    
+    try {
+        const user = jwt.verify(token, JWT_SECRET);
+        console.log("User using diary: " + user);
+        
+        if (!user) {
+            return res.status(400).send({ status: "error", data: "Invalid user" });
+        }
+        
+        const useremail = user.email;
+        
+        const updatedDiary = await Diary.findOneAndUpdate(
+            { email: useremail },
+            { $push: { entries: { $each: entries } } },
+            { new: true, upsert: true } // Create a new document if not found
+        );
+        
+        res.send({ status: "OK", data: updatedDiary });
+    } catch (error) {
+        console.log("Error with food diary: " + error);
+        return res.status(500).send({ status: "error", data: error.message });
+    }
+});
 
+app.post("/foodData", async(req, res) => {
+    const {token} = req.body;
 
+    try {
+        const user = jwt.verify(token, JWT_SECRET, (err, res) => {
+            if(err) {
+                return "token expired";
+            }
+            return res;
+        });
+        console.log(user)
+        if(user == "token expired") {
+            return res.send({status: "error", data: "token expired"});
+        }
+
+        const useremail = user.email;
+        Diary.findOne({email: useremail})
+            .then((data) => {
+                res.send({status: "OK", data: data});
+            })
+            .catch((error) => {
+                res.send({status: "error", data: error});
+            })
+    } catch(error) {
+        res.send({status: "ERROR"})
+    }
+});
 
 app.listen(5000, () => {
     console.log("Server started.")

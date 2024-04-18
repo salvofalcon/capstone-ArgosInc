@@ -337,15 +337,6 @@ export default class Diary extends Component<
               </Link>
             </Paper>
           </Stack>
-
-          <Center>
-            <Button
-              style={{ backgroundColor: "#22B37B" }}
-              onClick={this.logOut}
-            >
-              Sign out
-            </Button>
-          </Center>
         </Container>
       </>
     );

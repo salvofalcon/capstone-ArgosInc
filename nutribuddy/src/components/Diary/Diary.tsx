@@ -5,6 +5,7 @@ import { rem } from "@mantine/core";
 import { IconCalendar } from "@tabler/icons-react";
 import { DatePickerInput } from "@mantine/dates";
 import "@mantine/dates/styles.css";
+import { Link } from "react-router-dom";
 
 export default class Diary extends Component<
   object,
@@ -296,36 +297,44 @@ export default class Diary extends Component<
               <h2>Breakfast</h2>
               <hr></hr>
               {this.renderBreakfastEntries()}
-              <Button color="green" variant="transparent" radius="lg">
-                Add Food
-              </Button>
+              <Link to="/foodLookup">
+                <Button color="green" variant="transparent" radius="lg">
+                  Add Food
+                </Button>
+              </Link>
             </Paper>
 
             <Paper withBorder p="lg" mt="lg">
               <h2>Lunch</h2>
               <hr></hr>
               {this.renderLunchEntries()}
-              <Button color="green" variant="transparent" radius="lg">
-                Add Food
-              </Button>
+              <Link to="/foodLookup">
+                <Button color="green" variant="transparent" radius="lg">
+                  Add Food
+                </Button>
+              </Link>
             </Paper>
 
             <Paper withBorder p="lg" mt="lg">
               <h2>Dinner</h2>
               <hr></hr>
               {this.renderDinnerEntries()}
-              <Button color="green" variant="transparent" radius="lg">
-                Add Food
-              </Button>
+              <Link to="/foodLookup">
+                <Button color="green" variant="transparent" radius="lg">
+                  Add Food
+                </Button>
+              </Link>
             </Paper>
 
             <Paper withBorder p="lg" mt="lg">
               <h2>Snacks</h2>
               <hr></hr>
               {this.renderSnackEntries()}
-              <Button color="green" variant="transparent" radius="lg">
-                Add Food
-              </Button>
+              <Link to="/foodLookup">
+                <Button color="green" variant="transparent" radius="lg">
+                  Add Food
+                </Button>
+              </Link>
             </Paper>
           </Stack>
 

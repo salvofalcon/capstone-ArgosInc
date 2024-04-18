@@ -38,8 +38,53 @@ export const Dashboard: React.FC<DashboardProps> = (props) => {
     }
   };
 
+  const fetchCalorieData = async () => {
+    try {
+      const token = window.localStorage.getItem("token");
+      if (!token) throw new Error("No token found");
+
+      const response = await fetch("http://localhost:5000/foodData", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+        body: JSON.stringify({ token }),
+      });
+
+      if (!response.ok) throw new Error("Network response was not ok");
+
+      const foodData = await response.json();
+      const selectedDate = new Date();
+      const entriesForSelectedDate = foodData.data.entries.filter(
+        (entry: { date: string | number | Date }) => {
+          const entryDate = new Date(entry.date);
+          return (
+            entryDate.getFullYear() === selectedDate.getFullYear() &&
+            entryDate.getMonth() === selectedDate.getMonth() &&
+            entryDate.getDate() === selectedDate.getDate()
+          );
+        }
+      );
+
+      const totalCalories = entriesForSelectedDate.reduce(
+        (acc: number, entry: { calories: number }) => acc + entry.calories,
+        0
+      );
+
+      setCaloriesConsumed(totalCalories);
+    } catch (error) {
+      console.error("Failed to fetch user data: ", error);
+    }
+  };
+
   useEffect(() => {
     fetchUserData();
+  }, []);
+
+  useEffect(() => {
+    fetchCalorieData();
   }, []);
 
   useEffect(() => {
@@ -49,23 +94,22 @@ export const Dashboard: React.FC<DashboardProps> = (props) => {
   const progress = (caloriesConsumed / calorieGoal) * 100;
 
   const titleStyle = {
-    fontSize: '3rem', // Make title bigger
+    fontSize: "3rem", // Make title bigger
     fontWeight: 700,
-    color: '#19c26b', // Use a custom color for the title
-    margin: '20px 0',
+    color: "#19c26b", // Use a custom color for the title
+    margin: "20px 0",
   };
-  
+
   const textStyle = {
-    fontSize: '1.5rem', // Increase the font size for text
-    color: 'white', // Slightly darker text for better readability
-    margin: 'white', // Add more vertical space between text elements
+    fontSize: "1.5rem", // Increase the font size for text
+    color: "white", // Slightly darker text for better readability
+    margin: "white", // Add more vertical space between text elements
   };
-  
+
   const buttonStyle = {
-    marginTop: '30px', // Increase space above the button
-    fontSize: '1.25rem', // Larger button text
+    marginTop: "30px", // Increase space above the button
+    fontSize: "1.25rem", // Larger button text
   };
-  
 
   const navigateToFoodDiary = () => {
     // Logic to navigate to the food diary page will go here
@@ -79,13 +123,21 @@ export const Dashboard: React.FC<DashboardProps> = (props) => {
       }}
       padding="md"
     >
+      <AppShell.Header>
+        <HeaderMegaMenu />
+      </AppShell.Header>
 
-<AppShell.Header>
-          <HeaderMegaMenu />
-        </AppShell.Header>
-
-
-      <Container size="lg" mt="md" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100vh' }}>
+      <Container
+        size="lg"
+        mt="md"
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          height: "100vh",
+        }}
+      >
         <Paper
           shadow="sm"
           radius="md"
@@ -94,13 +146,17 @@ export const Dashboard: React.FC<DashboardProps> = (props) => {
           style={{ marginTop: 10 }}
         >
           <Title style={titleStyle}>Your Dashboard</Title>
-          <Text style={textStyle}>Calorie Goal: {calorieGoal}</Text>
-          <Text style={textStyle}>Calories Consumed: {caloriesConsumed}</Text>
-          <Text style={textStyle}>Calories Remaining: {caloriesRemaining}</Text>
+          <Text style={textStyle}>Calorie Goal: {Math.floor(calorieGoal)}</Text>
+          <Text style={textStyle}>
+            Calories Consumed: {Math.floor(caloriesConsumed)}
+          </Text>
+          <Text style={textStyle}>
+            Calories Remaining: {Math.floor(caloriesRemaining)}
+          </Text>
           <RingProgress
-            sections={[{ value: progress, color: '#19c26b' }]}
+            sections={[{ value: progress, color: "#19c26b" }]}
             label={
-              <Text color="#19c26b" size="xl" style={{ textAlign: 'center' }}>
+              <Text color="#19c26b" size="xl" style={{ textAlign: "center" }}>
                 {`${Math.round(progress)}%`}
               </Text>
             }
@@ -108,12 +164,12 @@ export const Dashboard: React.FC<DashboardProps> = (props) => {
             thickness={8}
             roundCaps={true}
           />
-          
         </Paper>
-        <Button style={buttonStyle}
+        <Button
+          style={buttonStyle}
           onClick={navigateToFoodDiary}
           variant="filled"
-          color='#19c26b'
+          color="#19c26b"
         >
           Log Meals
         </Button>

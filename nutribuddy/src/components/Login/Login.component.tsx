@@ -48,7 +48,12 @@ export default class Login extends Component<
           //alert("Login successful");
           window.localStorage.setItem("token", data.data);
           window.localStorage.setItem("loggedIn", "true");
-          window.location.href = "./userHome";
+
+          if (data.bmrCalculated) { 
+          window.location.href = "./dashboard";
+          } else {
+            window.location.href = "/bmr-calculator";
+          }
         } else {
           alert("Login failed, please try again");
         }

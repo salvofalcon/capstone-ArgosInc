@@ -66,7 +66,7 @@ app.post("/login-user", async(req, res) => {
         });
 
         if(res.status(201)) {
-            return res.json({ status: "OK", data: token});
+            return res.json({ status: "OK", data: token, bmrCalculated: user.bmrCalculated});
         } else {
             return res.json({ error: "error"});
         }
@@ -103,7 +103,7 @@ app.post("/userData", async(req, res) => {
 });
 
 app.post("/complete-profile", async(req, res) => {
-    const {height, weight, age, sex, bmr, goal, activityLevel, userCalorieGoal} = req.body
+    const {height, weight, age, sex, bmr, goal, activityLevel, userCalorieGoal, bmrCalculated} = req.body
     const {token} = req.body;
 
     try {
@@ -128,6 +128,8 @@ app.post("/complete-profile", async(req, res) => {
             goal: goal,
             activityLevel: activityLevel,
             userCalorieGoal: userCalorieGoal,
+            bmrCalculated: true,
+
         }, { new: true})
             .then((data) => {
                 res.send({status: "OK", data: data});

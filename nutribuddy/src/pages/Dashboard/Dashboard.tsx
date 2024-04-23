@@ -10,7 +10,7 @@ interface DashboardProps {
 
 export const Dashboard: React.FC<DashboardProps> = (props) => {
   const [calorieGoal, setCalorieGoal] = useState(-1000000); // Replace with real goal
-  const [caloriesConsumed, setCaloriesConsumed] = useState(1800);
+  const [caloriesConsumed, setCaloriesConsumed] = useState(0);
   const [caloriesRemaining, setCaloriesRemaining] = useState(0);
 
   const fetchUserData = async () => {

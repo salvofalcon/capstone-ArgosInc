@@ -17,6 +17,7 @@ const UserDetailsSchema = new mongoose.Schema(
         goal: String,
         userCalorieGoal: String,
         caloriesConsumedToday: Number,
+        bmrCalculated: { type: Boolean, default: false},
     },
     {
         collection: "UserInfo"

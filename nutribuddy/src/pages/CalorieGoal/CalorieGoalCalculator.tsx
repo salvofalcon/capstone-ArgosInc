@@ -64,6 +64,8 @@ const BMRCalculator: React.FC = () => {
         goal: goal,
         activityLevel: activityLevel,
         userCalorieGoal: userCalorieGoal,
+        bmrCalculated: true,
+
       };
 
       try {
@@ -93,6 +95,7 @@ const BMRCalculator: React.FC = () => {
     }
   };
 
+  
   return (
     <Container size="sm" mt="md">
       <form onSubmit={handleSubmit}>

@@ -87,9 +87,11 @@ const BMRCalculator: React.FC = () => {
         }
 
         const responseData = await response.json();
+        
       } catch (error) {
         console.error("There was a problem with the fetch:", error);
       }
+      window.location.href = "/dashboard"
     } else {
       console.error("Invalid input");
     }

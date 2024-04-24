@@ -84,21 +84,6 @@ export function HeroTitle() {
         </div>
         <img src={image} className={classes.image2} />
       </div>
-
-      <div className={classes.wrapper}>
-        <div className={classes.body2}>
-          <Container p="xl">
-            <Title className={classes.title2} p="xl">
-              Placeholder
-            </Title>
-            <Text fz="md">
-              We offer a comprehensive range of services in the Diet & Nutrition
-              industry, tailored to meet individual needs and promote healthy
-              living.
-            </Text>
-          </Container>
-        </div>
-      </div>
     </div>
   );
 }

@@ -171,9 +171,9 @@ export function HeaderMegaMenu() {
             <Link to="/foodLookup" className={classes.link}>
               Food Lookup
             </Link>
-            <a href="#" className={classes.link}>
-              Track Calories
-            </a>
+            <Link to="/" className={classes.link}>
+              Food Diary
+            </Link>
             <Link to="/dashboard" className={classes.link}>
               Dashboard
             </Link>

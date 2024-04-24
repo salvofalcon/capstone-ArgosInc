@@ -102,8 +102,6 @@ export const Dashboard: React.FC<DashboardProps> = (props) => {
 
   const textStyle = {
     fontSize: "1.5rem", // Increase the font size for text
-    color: "white", // Slightly darker text for better readability
-    margin: "white", // Add more vertical space between text elements
   };
 
   const buttonStyle = {

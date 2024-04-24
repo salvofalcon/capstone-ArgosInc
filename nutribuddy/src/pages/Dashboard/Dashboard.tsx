@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { Button, AppShell, Container, Text, RingProgress, Title, Paper } from '@mantine/core';
 import { HeaderMegaMenu } from "../../components/HeaderMegaMenu/HeaderMegaMenu";  // Adjust the path as necessary
+import { Link } from "react-router-dom";
 
 interface DashboardProps {
   // Props definition if needed
@@ -15,11 +16,11 @@ export const Dashboard: React.FC<DashboardProps> = (props) => {
 
   const fetchUserData = async () => {
     try {
-      const token = window.localStorage.getItem('token'); // Assuming token is stored in localStorage
-      if (!token) throw new Error('No token found');
+      const token = window.localStorage.getItem("token"); // Assuming token is stored in localStorage
+      if (!token) throw new Error("No token found");
 
       const response = await fetch("http://localhost:5000/userData", {
-        method: 'POST',
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
@@ -28,13 +29,12 @@ export const Dashboard: React.FC<DashboardProps> = (props) => {
         body: JSON.stringify({ token }),
       });
 
-      if (!response.ok) throw new Error('Network response was not ok');
+      if (!response.ok) throw new Error("Network response was not ok");
 
       const userData = await response.json();
       setCalorieGoal(userData.data.userCalorieGoal); // Update state with fetched calorie goal
-
     } catch (error) {
-      console.error('Failed to fetch user data: ', error);
+      console.error("Failed to fetch user data: ", error);
     }
   };
 
@@ -165,14 +165,16 @@ export const Dashboard: React.FC<DashboardProps> = (props) => {
             roundCaps={true}
           />
         </Paper>
-        <Button
-          style={buttonStyle}
-          onClick={navigateToFoodDiary}
-          variant="filled"
-          color="#19c26b"
-        >
-          Log Meals
-        </Button>
+        <Link to="/foodLookup">
+          <Button
+            style={buttonStyle}
+            onClick={navigateToFoodDiary}
+            variant="filled"
+            color="#19c26b"
+          >
+            Log Meals
+          </Button>
+        </Link>
       </Container>
     </AppShell>
   );
